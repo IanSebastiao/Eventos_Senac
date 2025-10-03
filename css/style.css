@@ -96,6 +96,14 @@ nav a:hover{
     color: #ff6600;
 }
 
+.pagina-atual:hover{
+    color: white
+}
+
+pagina-atual{
+    color: #ff6600;
+}
+
 /* Cards */
 .card-container{
     display: flex;
@@ -238,3 +246,31 @@ img:hover {
     letter-spacing: 0.5px;
 }
 
+.button-workshop {
+    width: 100%;
+    padding: 12px;
+    background: #f0ad4e;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button-palestra {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pagina-atual {
+    color: #ff6600;
+    text-decoration: none;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Para facilitar as buscar na web -->
+  <meta naem="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos Senac</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>Eventos Senac CEP Catalão</h1>
+    <nav>
+      <ul>
+        <li><a class="pagina-atual" href="home.html"><i class=" fas fa-home"></i> Home</a></li>
+        <li><a href="programacao.html"><i class=" fas fa-calendar-alt"></i> Programação</a></li>
+        <li><a href="inscricao.html"><i class=" fas fa-address-book"></i> Inscrição</a></li>
+        <li><a href="sobre.html"><i class=" fas fa-info-circle"></i> Sobre</a></li>
+        <!-- target="_blank" abre nova aba -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="galeria">
+      <h2>Galeria do Evento</h2>
+      <div class="card-container">
+        <figure class="card">
+          <img src="images/palestra1.jpeg" alt="Palestra Setembro Vermelho" class="card-img">
+          <figcaption>
+            <h3 class="h3-img">Palestra Setembro Vermelho</h3>
+            <p>Descrição...</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card">
+          <img src="images/palestra2.jpeg" alt="Palestra Setembro Amarelo" class="card-img">
+          <figcaption>
+            <h3 class="h3-img">Palestra Setembro Amarelo</h3>
+            <p>Descrição...</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <h2>Video do Evento Anterior</h2>
+      <div class="card-container">
+        <div class="card">
+          <video width="400" controls poster="imagens/capa-video.jpg">
+            <source src="videos/evento.mp4" type="video/mp4">
+            Seu navegador não suporta videos HTML5.
+          </video>
+        </div>
+        <div class="card">
+          <iframe width="400" src="https://www.youtube.com/embed/b7GjV_aeoK4?si=fnK60xYrzIhEOT4q"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <form class="footer">
+      <p>&copy; 2025 Senac CEP Catalão</p>
+    </form>
+  </footer>
+
+  <!-- <p>Participe de palestras, oficinas e networking sobre tecnologia e inovação.</p> -->
+</body>
+
+
+</html>
