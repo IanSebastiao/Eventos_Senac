@@ -3,36 +3,36 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- Para facilitar as buscar na web -->
-  <meta naem="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking">
+  <meta name="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eventos Senac</title>
-  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+  <!-- Isso é um comentário -->
   <header>
     <h1>Eventos Senac CEP Catalão</h1>
     <nav>
       <ul>
-       <li><a href="home.html"><i class=" fas fa-home"></i> Home</a></li>
-        <li><a href="programacao.html"><i class=" fas fa-calendar-alt"></i> Programação</a></li>
-        <li><a class="pagina-atual" href="inscricao.html"><i class=" fas fa-address-book"></i> Inscrição</a></li>
-        <li><a href="sobre.html"><i class=" fas fa-info-circle"></i> Sobre</a></li>
-        <!-- target="_blank" abre nova aba -->
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
+        <li><a href="inscricao.html" class="active"><i class="fas fa-address-book"></i> Inscrição</a></li>
+        <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
       </ul>
     </nav>
+    <!-- <a href="https://www.go.senac.br" target="_blank">SENAC GO</a> -->
   </header>
 
   <main>
     <section id="inscricao">
       <h2>Inscreva-se no Evento</h2>
       <form action="#" method="post" class="formulario">
-        <label for="nome">Nome</label>
+        <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
 
-        <label for="email">E-mail</label>
+        <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required>
 
         <label for="atividade">Atividade de interesse:</label>
@@ -42,19 +42,14 @@
           <option value="painel">Painéis</option>
         </select>
 
-        <button type="submit">Enviar Inscrição</button>
+        <button type="submit">Enviar inscrição</button>
       </form>
     </section>
   </main>
-
-  <footer>
-    <form class="footer">
-      <p>&copy; 2025 Senac CEP Catalão</p>
-    </form>
+  <footer class="footer">
+    <p>&copy; 2025 Senac CEP Catalão</p>
   </footer>
 
-  <!-- <p>Participe de palestras, oficinas e networking sobre tecnologia e inovação.</p> -->
 </body>
-
 
 </html>
