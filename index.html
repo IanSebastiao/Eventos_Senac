@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <title>Eventos Senac CEP Catalão</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,8 +13,12 @@
 <body>
   <header class="site-header">
     <h1>Eventos Senac CEP Catalão</h1>
-    <nav>
-      <ul>
+    <nav class="navbar">
+        <button class="menu-toggle" aria-label="Abrir menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
         <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
         <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
@@ -23,6 +28,16 @@
   </header>
 
   <main>
+    <section>
+      <h2>Eventos do Mês</h2>
+      <div class="carousel-container">
+        <div class="carousel" id="carrossel">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+    </section>
+
     <section id="galeria">
       <h2>Galeria do Evento</h2>
       <div class="cards-container">
@@ -68,9 +83,12 @@
     <p id="demo"></p>
   </footer>
 
-<script>
-  // document.getElementById("demo").innerHTML = "<h2>Hello World</h2>";
-</script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/carrossel.js"></script>
+  <script src="js/menu.js"></script>
+  <script>
+    // document.getElementById("demo").innerHTML = "<h2>Hello World</h2>";
+  </script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@
   <meta name="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eventos Senac</title>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -14,8 +15,12 @@
   <!-- Isso é um comentário -->
   <header>
     <h1>Eventos Senac CEP Catalão</h1>
-    <nav>
-      <ul>
+    <nav class="navbar">
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
         <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="programacao.html" class="active"><i class="fas fa-calendar-alt"></i> Programação</a></li>
         <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
@@ -38,7 +43,8 @@
 
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="js/programacao.js"></script>
-
+  <script src="js/menu.js"></script>
+  
 </body>
 
 </html>

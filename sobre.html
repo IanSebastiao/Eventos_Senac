@@ -6,6 +6,7 @@
   <meta name="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre</title>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -14,8 +15,12 @@
   <!-- Isso é um comentário -->
   <header>
     <h1>Eventos Senac CEP Catalão</h1>
-    <nav>
-      <ul>
+    <nav class="navbar">
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
         <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
         <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
@@ -32,12 +37,101 @@
         área de tecnologia.</p>
     </section>
 
-  
+    <section id="programacao">
+      <h2>Programação</h2>
+      <div class="cards-container">
+        <div class="card">
+          <span class="badge palestra">Palestra</span>
+          <h3>Palestra: Inovação e Mercado Digital</h3>
+          <p><strong>Data:</strong> 26/09/2025 - <strong>Hora:</strong> 10:00</p>
+          <p><strong>Palestrante:</strong> João Santos</p>
+          <p><i class="fas fa-map-marker-alt"></i><small>Auditório Principal</small></p>
+        </div>
+
+        <div class="card">
+          <span class="badge workshop">Workshop</span>
+          <h3>Oficina: Desenvolvimento Web com HTML e CSS</h3>
+          <p><strong>Data:</strong> 29/09/2025 - <strong>Hora:</strong> 09:00</p>
+          <p><strong>Palestrante:</strong> Ana Oliveira</p>
+          <p><i class="fas fa-map-marker-alt"></i><small>Sala 101</small></p>
+        </div>
+
+        <div class="card">
+          <span class="badge palestra">Palestra</span>
+          <h3>Painel de Discussão: Tendências em JavaScript</h3>
+          <p><strong>Data:</strong> 04/10/2025 - <strong>Hora:</strong> 15:00</p>
+          <p><strong>Palestrante:</strong> Carlos Lima</p>
+          <p><i class="fas fa-map-marker-alt"></i><small>Auditório</small></p>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="galeria">
+      <h2>Galeria do Evento</h2>
+      <div class="cards-container">
+        <figure class="card">
+          <img src="images/palestra1.jpeg" alt="Palestra Setembro Vermelho" class="card-img">
+          <figcaption>
+            <h3 class="h3-img">Palestra Setembro Vermelho</h3>
+            <p>Descrição...</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card">
+          <img src="images/palestra2.jpeg" alt="Palestra Setembro Amarelo" class="card-img">
+          <figcaption>
+            <h3 class="h3-img">Palestra Setembro Amarelo</h3>
+            <p>Descrição...</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <h2>Vídeo do Evento Anterior</h2>
+      <div class="cards-container">
+        <div class="card">
+          <video width="400" controls poster="imagens/capa-video.jpg">
+            <source src="videos/evento.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo HTML5.
+          </video>
+          <p>Descrição...</p>
+        </div>
+        <div class="card">
+          <iframe width="400" src="https://www.youtube.com/embed/Ub7tlT05Aq0?si=Hz5QeUWB8ysUGyq-"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p>Descrição...</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="inscricao">
+      <h2>Inscreva-se no Evento</h2>
+      <form action="#" method="post" class="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="atividade">Atividade de interesse:</label>
+        <select id="atividade" name="atividade">
+          <option value="palestra">Palestras</option>
+          <option value="oficina">Oficinas</option>
+          <option value="painel">Painéis</option>
+        </select>
+
+        <button type="submit">Enviar inscrição</button>
+      </form>
+    </section>
   </main>
   <footer class="footer">
     <p>&copy; 2025 Senac CEP Catalão</p>
   </footer>
 
+  <script src="js/menu.js"></script>
+  
 </body>
 
 </html>

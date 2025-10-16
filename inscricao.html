@@ -3,32 +3,86 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eventos Senac</title>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <title>Inscrição | Eventos Senac CEP Catalão</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Quebra de linha e boa legibilidade no select */
+    select#atividade {
+      white-space: normal;
+      /* permite quebra de linha */
+      line-height: 1.4;
+      max-width: 100%;
+      padding: 8px;
+      font-size: 1rem;
+    }
+
+    option {
+      white-space: normal;
+      /* permite que o texto quebre */
+      padding: 4px 6px;
+    }
+
+    .inscricao-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .formulario label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .formulario input,
+    .formulario select,
+    .formulario button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .formulario button {
+      background-color: #004aad;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .formulario button:hover {
+      background-color: #0066cc;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Isso é um comentário -->
-  <header>
+  <header class="site-header">
     <h1>Eventos Senac CEP Catalão</h1>
-    <nav>
-      <ul>
+    <nav class="navbar">
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
         <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
         <li><a href="inscricao.html" class="active"><i class="fas fa-address-book"></i> Inscrição</a></li>
         <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
       </ul>
     </nav>
-    <!-- <a href="https://www.go.senac.br" target="_blank">SENAC GO</a> -->
   </header>
 
   <main>
-    <section id="inscricao">
+    <section class="inscricao-section">
       <h2>Inscreva-se no Evento</h2>
-      <form action="#" method="post" class="formulario">
+      <form id="formInscricao" class="formulario">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
 
@@ -36,20 +90,22 @@
         <input type="email" id="email" name="email" required>
 
         <label for="atividade">Atividade de interesse:</label>
-        <select id="atividade" name="atividade">
-          <option value="palestra">Palestras</option>
-          <option value="oficina">Oficinas</option>
-          <option value="painel">Painéis</option>
+        <select id="atividade" name="atividade" required>
+          <option value="">Carregando atividades...</option>
         </select>
 
         <button type="submit">Enviar inscrição</button>
       </form>
     </section>
   </main>
+
   <footer class="footer">
     <p>&copy; 2025 Senac CEP Catalão</p>
   </footer>
 
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script type="module" src="js/inscricao.js"></script>
+  <script src="js/menu.js"></script>
 </body>
 
 </html>
