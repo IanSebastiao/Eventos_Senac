@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <title>Inscrição | Eventos Senac CEP Catalão</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -76,6 +75,10 @@
         <li><a href="inscricao.html" class="active"><i class="fas fa-address-book"></i> Inscrição</a></li>
         <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
       </ul>
+
+      <div class="auth-area">
+        <button id="auth-btn" class="btn-auth">Admin</button>
+      </div>
     </nav>
   </header>
 
@@ -103,9 +106,12 @@
     <p>&copy; 2025 Senac CEP Catalão</p>
   </footer>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script type="module" src="js/inscricao.js"></script>
+  <!-- Scripts -->
+  <script src="js/inscricao.js"></script>
   <script src="js/menu.js"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script srt="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 
 </html>

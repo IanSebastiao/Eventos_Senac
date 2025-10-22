@@ -22,7 +22,7 @@ h1 {
   color: #003366;
   /* azul institucional */
   text-align: center;
-  margin: 60px auto 20px;
+  margin: 40px auto 20px;
   position: relative;
   font-weight: bold;
   letter-spacing: 1px;
@@ -71,7 +71,7 @@ nav {
   /* sempre no topo */
   top: 0;
   width: 100%;
-  height: 120px;
+  height: 100px;
   z-index: 1000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -94,23 +94,10 @@ nav a {
   font-weight: 500;
   padding: 10px;
   transition: color 0.3s ease;
-  font-size: 1.2rem;
 }
 
 nav a:hover {
   color: #ff6600;
-}
-
-nav ul li {
-  display: flex;
-  align-items: center;
-}
-
-/* Estilo para o logotipo */
-nav ul li img {
-  height: 80px;
-  width: auto;
-  margin-right: 10px;
 }
 
 /* Botão hambúrguer (visível apenas no mobile) */
@@ -129,6 +116,34 @@ nav ul li img {
 
 .active:hover {
   color: #fff;
+}
+
+nav ul li {
+  display: flex;
+  align-items: center;
+}
+/* Estilo para o logotipo */
+nav ul li img {
+  height: 80px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.auth-area {
+  position: absolute;
+  right: 70px;
+  top: 25px;
+  z-index: 2002
+}
+
+.btn-auth {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 /* ==========================
@@ -226,10 +241,6 @@ img:hover {
 
 .badge.seminário {
   background-color: #2f3dc0;
-}
-
-.badge.mesa-redonda {
-  background-color: #272b4d;
 }
 
 .card i {
@@ -374,7 +385,6 @@ img:hover {
 }
 
 /* === CARROSSEL === */
-/* === CARROSSEL === */
 .carousel-container {
   position: relative;
   max-width: 700px;
@@ -467,6 +477,8 @@ button.next {
 .indicator.active {
   background: #0056b3;
 }
+
+
 
 /* Responsivo */
 @media (max-width: 600px) {

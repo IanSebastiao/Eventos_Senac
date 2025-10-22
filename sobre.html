@@ -3,17 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Evento Senac CEP Catalão - Palestras, oficinas e networking.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre</title>
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <!-- Isso é um comentário -->
-  <header>
+  <header class="site-header">
     <h1>Eventos Senac CEP Catalão</h1>
     <nav class="navbar">
       <button class="menu-toggle" aria-label="Abrir menu">
@@ -26,104 +23,23 @@
         <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
         <li><a href="sobre.html" class="active"><i class="fas fa-info-circle"></i> Sobre</a></li>
       </ul>
+      <div class="auth-area">
+        <button id="auth-btn" class="btn-auth">Admin</button>
+      </div>
     </nav>
-    <!-- <a href="https://www.go.senac.br" target="_blank">SENAC GO</a> -->
   </header>
-
   <main>
-    <section id="sobre">
-      <h2>Sobre o Evento</h2>
-      <p>O Evento Senac CEP Catalão reúne palestras, oficinas e oportunidades de networking na
-        área de tecnologia.</p>
+    <section>
+      <h2>Sobre o Site Eventos Senac Catalão</h2>
+      <p>O Evento Senac CEP Catalão reúne palestras, oficinas e oportunidades de networking na área de tecnologia.</p>
     </section>
 
-    <section id="programacao">
-      <h2>Programação</h2>
-      <div class="cards-container">
-        <div class="card">
-          <span class="badge palestra">Palestra</span>
-          <h3>Palestra: Inovação e Mercado Digital</h3>
-          <p><strong>Data:</strong> 26/09/2025 - <strong>Hora:</strong> 10:00</p>
-          <p><strong>Palestrante:</strong> João Santos</p>
-          <p><i class="fas fa-map-marker-alt"></i><small>Auditório Principal</small></p>
-        </div>
-
-        <div class="card">
-          <span class="badge workshop">Workshop</span>
-          <h3>Oficina: Desenvolvimento Web com HTML e CSS</h3>
-          <p><strong>Data:</strong> 29/09/2025 - <strong>Hora:</strong> 09:00</p>
-          <p><strong>Palestrante:</strong> Ana Oliveira</p>
-          <p><i class="fas fa-map-marker-alt"></i><small>Sala 101</small></p>
-        </div>
-
-        <div class="card">
-          <span class="badge palestra">Palestra</span>
-          <h3>Painel de Discussão: Tendências em JavaScript</h3>
-          <p><strong>Data:</strong> 04/10/2025 - <strong>Hora:</strong> 15:00</p>
-          <p><strong>Palestrante:</strong> Carlos Lima</p>
-          <p><i class="fas fa-map-marker-alt"></i><small>Auditório</small></p>
-        </div>
-      </div>
-
-    </section>
-
-    <section id="galeria">
-      <h2>Galeria do Evento</h2>
-      <div class="cards-container">
-        <figure class="card">
-          <img src="images/palestra1.jpeg" alt="Palestra Setembro Vermelho" class="card-img">
-          <figcaption>
-            <h3 class="h3-img">Palestra Setembro Vermelho</h3>
-            <p>Descrição...</p>
-          </figcaption>
-        </figure>
-
-        <figure class="card">
-          <img src="images/palestra2.jpeg" alt="Palestra Setembro Amarelo" class="card-img">
-          <figcaption>
-            <h3 class="h3-img">Palestra Setembro Amarelo</h3>
-            <p>Descrição...</p>
-          </figcaption>
-        </figure>
-      </div>
-
-      <h2>Vídeo do Evento Anterior</h2>
-      <div class="cards-container">
-        <div class="card">
-          <video width="400" controls poster="imagens/capa-video.jpg">
-            <source src="videos/evento.mp4" type="video/mp4">
-            Seu navegador não suporta vídeo HTML5.
-          </video>
-          <p>Descrição...</p>
-        </div>
-        <div class="card">
-          <iframe width="400" src="https://www.youtube.com/embed/Ub7tlT05Aq0?si=Hz5QeUWB8ysUGyq-"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <p>Descrição...</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="inscricao">
-      <h2>Inscreva-se no Evento</h2>
-      <form action="#" method="post" class="formulario">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="atividade">Atividade de interesse:</label>
-        <select id="atividade" name="atividade">
-          <option value="palestra">Palestras</option>
-          <option value="oficina">Oficinas</option>
-          <option value="painel">Painéis</option>
-        </select>
-
-        <button type="submit">Enviar inscrição</button>
-      </form>
+    <section>
+      <h2>Localização</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3790.912812978743!2d-47.943658724058494!3d-18.167929885867625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a6666d2e717613%3A0x61b9c9bc07717031!2sSenac%20Catal%C3%A3o!5e0!3m2!1spt-BR!2sbr!4v1759426211664!5m2!1spt-BR!2sbr"
+        width="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
   </main>
   <footer class="footer">
@@ -131,7 +47,9 @@
   </footer>
 
   <script src="js/menu.js"></script>
-  
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script srt="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 
 </html>

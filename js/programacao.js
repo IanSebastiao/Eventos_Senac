@@ -26,6 +26,7 @@ async function carregarEventos() {
       .map((evento) => {
         const tipoClasse = evento.tipo?.toLowerCase().replace(/\s+/g, "-") || "evento";
         const dataEvento = new Date(evento.data);
+        // Converte manualmente sem aplicar fuso horário
         const [ano, mes, dia] = evento.data.split("-").map(Number);
         const dataFormatada = `${String(dia).padStart(2, "0")}/${String(mes).padStart(2, "0")}/${ano}`;
         // const dataFormatada = dataEvento.toLocaleDateString("pt-BR", {

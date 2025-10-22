@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <title>Eventos Senac CEP Catalão</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,9 +13,9 @@
   <header class="site-header">
     <h1>Eventos Senac CEP Catalão</h1>
     <nav class="navbar">
-        <button class="menu-toggle" aria-label="Abrir menu">
-          <i class="fas fa-bars"></i>
-        </button>
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
         <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
@@ -24,15 +23,40 @@
         <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
         <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
       </ul>
+
+      <div class="auth-area">
+        <button id="auth-btn" class="btn-auth">Admin</button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <section>
+    <!-- <section id="carrossel">
+      <h2>Eventos da Semana</h2>
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-item">
+            <h3>Palestra: Inovação e Mercado Digital</h3>
+            <p>26/09/2025 • 10:00 • João Santos</p>
+          </div>
+          <div class="carousel-item">
+            <h3>Oficina: Desenvolvimento Web com HTML e CSS</h3>
+            <p>29/09/2025 • 09:00 • Ana Oliveira</p>
+          </div>
+          <div class="carousel-item">
+            <h3>Painel: Tendências em JavaScript</h3>
+            <p>04/10/2025 • 15:00 • Carlos Lima</p>
+          </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+    </section> -->
+
+    <section id="carrossel">
       <h2>Eventos do Mês</h2>
       <div class="carousel-container">
-        <div class="carousel" id="carrossel">
-        </div>
+        <div class="carousel" id="carousel"></div>
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
       </div>
@@ -41,54 +65,42 @@
     <section id="galeria">
       <h2>Galeria do Evento</h2>
       <div class="cards-container">
-        <figure class="card">
-          <img src="images/palestra1.jpeg" alt="Palestra Setembro Vermelho" class="card-img">
+        <figure class="card"> <img src="images/palestra1.jpeg" alt="Palestra Setembro Vermelho" class="card-img">
           <figcaption>
             <h3 class="h3-img">Palestra Setembro Vermelho</h3>
             <p>Descrição...</p>
           </figcaption>
         </figure>
-
-        <figure class="card">
-          <img src="images/palestra2.jpeg" alt="Palestra Setembro Amarelo" class="card-img">
+        <figure class="card"> <img src="images/palestra2.jpeg" alt="Palestra Setembro Amarelo" class="card-img">
           <figcaption>
             <h3 class="h3-img">Palestra Setembro Amarelo</h3>
             <p>Descrição...</p>
           </figcaption>
         </figure>
       </div>
-
       <h2>Vídeo do Evento Anterior</h2>
       <div class="cards-container">
-        <div class="card">
-          <video width="400" controls poster="imagens/capa-video.jpg">
-            <source src="videos/evento.mp4" type="video/mp4">
-            Seu navegador não suporta vídeo HTML5.
+        <figure class="card"> <video class="card-video" controls poster="images/capa-video.jpg">
+            <source src="videos/evento.mp4" type="video/mp4"> Seu navegador não suporta vídeo HTML5.
           </video>
-          <p>Descrição...</p>
-        </div>
-        <div class="card">
-          <iframe width="400" src="https://www.youtube.com/embed/Ub7tlT05Aq0?si=Hz5QeUWB8ysUGyq-"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <p>Descrição...</p>
-        </div>
+          <figcaption>
+            <h3 class="h3-img">Resumo do Evento</h3>
+            <p>Assista aos melhores momentos do evento anterior.</p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
-  <br>
+
   <footer class="footer">
     <p>&copy; 2025 Senac CEP Catalão</p>
-    <p id="demo"></p>
   </footer>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="js/carrossel.js"></script>
   <script src="js/menu.js"></script>
-  <script>
-    // document.getElementById("demo").innerHTML = "<h2>Hello World</h2>";
-  </script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script srt="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 
 </html>

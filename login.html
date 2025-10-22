@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Senac CEP Catalão</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>Eventos Senac CEP Catalão</h1>
+        <nav class="navbar">
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
+                <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
+                <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+            </ul>
+
+            <div class="auth-area">
+                <button id="auth-btn" class="btn-auth">Admin</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="formulario">
+            <h2>Entrar</h2>
+            <form id="login-form">
+                <label for="email">Email:</label>
+                <input id="email" type="email" required>
+
+                <label for="password">Senha:</label>
+                <input id="password" type="password" required>
+
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Senac CEP Catalão</p>
+    </footer>
+
+  <script src="js/menu.js"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script srt="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>

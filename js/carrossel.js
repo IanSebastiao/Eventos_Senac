@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderEvento(index) {
     const evento = eventos[index];
+    // Converte manualmente sem aplicar fuso horário
     const [ano, mes, dia] = evento.data.split("-").map(Number);
     const dataFormatada = `${String(dia).padStart(2, "0")}/${String(mes).padStart(2, "0")}/${ano}`;
     // const dataFormatada = new Date(evento.data).toLocaleDateString("pt-BR", {
