@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Senac CEP Catalão</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>Eventos Senac CEP Catalão</h1>
+        <nav class="navbar">
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html"><img src="images/logosenac.png" alt="logosenac"></a></li>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
+                <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
+                <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+            </ul>
+            <!-- botão de autenticação -->
+            <div class="auth-area">
+                <!-- inicialmente mostra Entrar; após login mostra nome + Sair -->
+                <li id="gestao" style="display:none">
+                    <a href="gestao.html" class="active">
+                        <i class="fas fa-gears"></i> Gestão
+                    </a>
+                </li>
+                <button id="auth-btn" class="btn-auth">Admin</button>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <main>
+            <section>
+                <h2><i class="fa-solid fa-plus-circle"></i>Cadastrar Atividade</h2>
+                <form id="atividadeForm">
+                    <label>Título</label>
+                    <input type="texto" id="titulo" required />
+
+                    <label>Tipo</label>
+                    <input type="texto" id="tipo" required />
+
+                    <label>Data</label>
+                    <input type="texto" id="data" required />
+
+                    <label>Hora</label>
+                    <input type="texto" id="hora" required />
+
+                    <label>Palestrante</label>
+                    <input type="texto" id="palestrante" required />
+
+                    <label>Descrição</label>
+                    <textarea type="texto" id="descricao"></textarea>
+
+                    <label>Local</label>
+                    <input type="texto" id="local" />
+
+                    <label>Vagas</label>
+                    <input type="number" id="vagas" min="1" />
+
+                    <label>Imagem da Atividade</label>
+                    <input type="file" id="foto" accept="image/*" />
+                    <div id="preview-container">
+                        <img id="preview-img" src="" alt="Pré-visualização" style="display:none;" />
+                    </div>
+
+                    <button type="submit">Salvar Atividade</button>
+                </form>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-list"></i>Atividades Cadastradas</h2>
+                <table id="tabelaAtividades">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Palestrante</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <!-- Linhas de atividades serão inseridas aqui dinamicamente -->
+                    <tbody></tbody>
+                </table>
+            </section>
+        </main>
+        <br>
+        <footer class="footer">
+            <p>&copy; 2025 Senac CEP Catalão</p>
+        </footer>
+        <script src="js/menu.js" defer></script>
+        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script src="js/gestao.js"></script>
+        <script src="js/supabase-config.js"></script>
+        <script src="js/auth.js"></script>
+
+    </body>
+
+</html>

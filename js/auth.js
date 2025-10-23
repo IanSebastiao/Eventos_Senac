@@ -1,118 +1,177 @@
+// ===============================
+// VERIFICAÇÃO PARA EVITAR DUPLICAÇÃO
+// ===============================
 if (typeof window.authLoaded === 'undefined') {
-    window.authLoaded = true;
+  window.authLoaded = true;
 
-    function waitForSupabase(callback) {
-        if (window.supabaseClient) {
-            callback(window.supabaseClient);
-        } else {
-            console.log('Aguardando Supabase ser carregado...');
-            setTimeout(() => waitForSupabase(callback), 100);
-        }
+  // Aguarda o Supabase estar disponível
+  function waitForSupabase(callback) {
+    if (window.supabaseClient) {
+      callback(window.supabaseClient);
+    } else {
+      console.log('Aguardando Supabase...');
+      setTimeout(() => waitForSupabase(callback), 100);
     }
+  }
 
-    function initializeAuth() {
-        waitForSupabase((supabase) => {
-            console.log('Supabase disponivel. Inicializando autenticação...');
+  function initializeAuth() {
+    waitForSupabase((supabase) => {
+      console.log('Supabase disponível, inicializando auth...');
 
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                console.log('Formulário de login encontrado.');
-                loginForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    console.log('Tentando fazer login...');
+      // ===============================
+      // LOGIN
+      // ===============================
+      const loginForm = document.getElementById("login-form");
+      if (loginForm) {
+        console.log("Formulário de login encontrado");
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          console.log("Formulário de login submetido");
 
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
 
-                    if (!email || !password) {
-                        alert('Por favor, preencha todos os campos.');
-                        return;
-                    }
+          if (!email || !password) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+          }
 
-                    try {
-                        const { data, error } = await supabase.auth.signInWithPassword({
-                            email: email,
-                            password: password,
-                        });
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password,
+            });
 
-                        if (error) {
-                            alert('Erro ao fazer login: ' + error.message);
-                            console.error('Erro de login:', error);
-                        } else {
-                            alert('Login bem-sucedido! Redirecionando...');
-                            window.location.href = 'gestao.html';
-                        }
-                    } catch (err) {
-                        console.error('Erro no login:', err);
-                        alert('Erro ao conectar ao servidor. Tente novamente mais tarde.');
-                    }
-                });
+            if (error) {
+              alert("Erro ao fazer login: " + error.message);
+            } else {
+              alert("Login realizado com sucesso!");
+              window.location.href = "gestao.html";
             }
-        }
-    )}
-    
-    const authBtn = document.getElementById('auth-btn');
+          } catch (err) {
+            console.error("Erro no login:", err);
+            alert("Erro ao conectar com o servidor.");
+          }
+        });
+      }
 
-    async function atualizarBotaoAuth() {
+      // ===============================
+      // CADASTRO
+      // ===============================
+      const signupForm = document.getElementById("signup-form");
+      if (signupForm) {
+        console.log("Formulário de cadastro encontrado");
+        signupForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("s-email").value.trim();
+          const password = document.getElementById("s-password").value.trim();
+
+          if (!email || !password) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+          }
+
+          if (password.length < 6) {
+            alert("A senha deve ter pelo menos 6 caracteres.");
+            return;
+          }
+
+          try {
+            const { data, error } = await supabase.auth.signUp({
+              email,
+              password,
+              options: {
+                data: {
+                  nome: email.split('@')[0]
+                }
+              }
+            });
+
+            if (error) {
+              alert("Erro ao criar conta: " + error.message);
+            } else {
+              alert("Conta criada com sucesso! Verifique seu email para confirmação.");
+              window.location.href = "login.html";
+            }
+          } catch (err) {
+            console.error("Erro no cadastro:", err);
+            alert("Erro ao conectar com o servidor.");
+          }
+        });
+      }
+
+      // ===============================
+      // BOTÃO "ENTRAR / SAIR"
+      // ===============================
+      const authBtn = document.getElementById("auth-btn");
+
+      async function atualizarBotaoAuth() {
         if (!authBtn) return;
 
         try {
-            console.log('Atualizando botão de autenticação...');
-            const { data: {session}, error } = await window.supabaseClient.auth.getSession();
+          console.log("Atualizando botão de auth...");
+          const { data: { session }, error } = await supabase.auth.getSession();
 
-            if (error) {
-                console.error('Erro ao obter sessão:', error);
-                return;
-            } 
+          if (error) {
+            console.error("Erro ao obter sessão:", error);
+            return;
+          }
 
-            console.log('Sessão:', session);
+          console.log("Sessão:", session);
 
-            if (session && session.user) {
-                const user = session.user;
-                const nome = user.user_metadata?.nome || user.email.split('@')[0];
-                authBtn.textContent = `Olá, ${nome.split("")[0]} (Sair)`;
-                authBtn.setAttribute("aria-label", "Fazer logout");
+          if (session && session.user) {
+            const user = session.user;
+            const nome = user.user_metadata?.nome || user.email.split("@")[0];
+            authBtn.textContent = `Olá, ${nome.split(" ")[0]} (Sair)`;
+            authBtn.setAttribute("aria-label", "Fazer logout");
 
-                authBtn.onclick = async () => {
-                    const { error } = await window.supabaseClient.auth.signOut();
-                    if (error) {
-                        alert('Erro ao Sair:', + error.message);
-                    } else {
-                        alert('Logout bem-sucedido! Redirecionando para a página inicial...');
-                        location.reload();
-                    }
-                };
-            } else {
-                authBtn.textContent = 'Admin';
-                authBtn.setAttribute("aria-label", "Fazer Login");
-                authBtn.onclick = () => {
-                    window.location.href = 'login.html';
-                };
-            } 
+            authBtn.onclick = async () => {
+              const { error } = await supabase.auth.signOut();
+              if (error) {
+                alert("Erro ao sair: " + error.message);
+              } else {
+                alert("Você saiu com sucesso.");
+                location.reload();
+              }
+            };
+          } else {
+            authBtn.textContent = "Admin";
+            authBtn.setAttribute("aria-label", "Fazer login");
+            authBtn.onclick = () => {
+              window.location.href = "login.html";
+            };
+          }
         } catch (err) {
-            console.error('Erro ao atualizar botão de autenticação:', err);
-        }  
-    } 
-
-    if (authBtn) {
-        if (!window.authStateListenerSet) {
-            window.authStateListenerSet = true;
-            supabase.auth.onAuthStateChange(() => {
-                console.log('Estado de autenticação alterado. Atualizando botão...');
-                atualizarBotaoAuth();
-            });
-        }  
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', atualizarBotaoAuth);
-        } else {
-            atualizarBotaoAuth();
+          console.error("Erro ao atualizar botão de auth:", err);
         }
-    }
+      }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeAuth);
-    }   else { 
-        initializeAuth();
-    }
-}        
+      // Inicializa apenas se estiver na página com o botão auth
+      if (authBtn) {
+        // Configura o listener UMA única vez
+        if (!window.authStateListenerSet) {
+          window.authStateListenerSet = true;
+          supabase.auth.onAuthStateChange(() => {
+            console.log("Estado de auth mudou");
+            atualizarBotaoAuth();
+          });
+        }
+
+        // Atualiza o botão quando a página carrega
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', atualizarBotaoAuth);
+        } else {
+          atualizarBotaoAuth();
+        }
+      }
+    });
+  }
+
+  // Inicia a inicialização
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAuth);
+  } else {
+    initializeAuth();
+  }
+}

@@ -129,13 +129,15 @@ nav ul li img {
   margin-right: 10px;
 }
 
+/* botão auth na nav (direita do logo, mas ainda no topo) */
 .auth-area {
   position: absolute;
   right: 70px;
   top: 25px;
-  z-index: 2002
+  z-index: 2002;
 }
 
+/* botão visual */
 .btn-auth {
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.15);
@@ -144,6 +146,12 @@ nav ul li img {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+}
+
+.btn-auth:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #ff6600;
+  color: #ff6600;
 }
 
 /* ==========================
@@ -361,6 +369,56 @@ img:hover {
 
 .formulario button:hover {
   background: #cc5200;
+}
+
+/*
+login
+*/
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 20px;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-card input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn-auth {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-auth:hover {
+  background-color: #003f8a;
 }
 
 /* ==========================

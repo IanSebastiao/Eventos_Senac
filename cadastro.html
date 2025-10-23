@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Eventos Senac CEP Catalão</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <h1>Cadastre-se</h1>
+    <nav class="navbar">
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
+        <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
+        <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+      </ul>
+      <!-- botão de autenticação -->
+      <div class="auth-area">
+        <!-- inicialmente mostra Entrar; após login mostra nome + Sair -->
+        <button id="auth-btn" class="btn-auth">Entrar</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <h2>Criar Conta</h2>
+
+      <form id="signup-form">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" required placeholder="Digite seu nome completo" />
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="Digite seu e-mail" />
+
+        <label for="password">Senha</label>
+        <input type="password" id="password" required placeholder="Crie uma senha" minlength="6" />
+
+        <button type="submit" class="btn-auth">Cadastrar</button>
+      </form>
+
+      <p>Já tem conta? <a href="login.html">Entrar</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Senac CEP Catalão</p>
+  </footer>
+
+  <!-- Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ===============================
+    // CONFIGURAÇÃO SUPABASE
+    // ===============================
+    const SUPABASE_URL = "https://nahxbuzzmatdzrqaacrf.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5haHhidXp6bWF0ZHpycWFhY3JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NDE4NTQsImV4cCI6MjA3NTAxNzg1NH0.wMiiiZZ3ZWxRy_RD_bRjHU4ck9tFpi1Ey8CPwFG18tQ";
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ===============================
+    // CADASTRO DE NOVO USUÁRIO
+    // ===============================
+    const form = document.getElementById("signup-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!nome || !email || !password) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      if (password.length < 6) {
+        alert("A senha deve ter pelo menos 6 caracteres.");
+        return;
+      }
+
+      // Cria o usuário com nome salvo em user_metadata
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { nome: nome },
+        },
+      });
+
+      if (error) {
+        alert("Erro ao cadastrar: " + error.message);
+      } else {
+        alert("Cadastro realizado com sucesso! Verifique seu e-mail para confirmar.");
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+
+</html>
