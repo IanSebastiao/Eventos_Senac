@@ -1,3 +1,4 @@
+// auth.js
 // ===============================
 // VERIFICAÇÃO PARA EVITAR DUPLICAÇÃO
 // ===============================
@@ -102,15 +103,15 @@ if (typeof window.authLoaded === 'undefined') {
       }
 
       // ===============================
-      // BOTÃO "ENTRAR / SAIR"
+      // BOTÃO "ENTRAR / SAIR" + GESTÃO
       // ===============================
       const authBtn = document.getElementById("auth-btn");
+      const gestaoLink = document.getElementById("gestao");
 
       async function atualizarBotaoAuth() {
         if (!authBtn) return;
 
         try {
-          console.log("Atualizando botão de auth...");
           const { data: { session }, error } = await supabase.auth.getSession();
 
           if (error) {
@@ -118,13 +119,16 @@ if (typeof window.authLoaded === 'undefined') {
             return;
           }
 
-          console.log("Sessão:", session);
-
           if (session && session.user) {
+            // Usuário logado
             const user = session.user;
             const nome = user.user_metadata?.nome || user.email.split("@")[0];
+
             authBtn.textContent = `Olá, ${nome.split(" ")[0]} (Sair)`;
             authBtn.setAttribute("aria-label", "Fazer logout");
+
+            // Mostra o link de gestão
+            if (gestaoLink) gestaoLink.style.display = "inline-block";
 
             authBtn.onclick = async () => {
               const { error } = await supabase.auth.signOut();
@@ -136,16 +140,21 @@ if (typeof window.authLoaded === 'undefined') {
               }
             };
           } else {
-            authBtn.textContent = "Admin";
+            // Usuário deslogado
+            authBtn.textContent = "Entrar";
             authBtn.setAttribute("aria-label", "Fazer login");
             authBtn.onclick = () => {
               window.location.href = "login.html";
             };
+
+            // Oculta o link de gestão
+            if (gestaoLink) gestaoLink.style.display = "none";
           }
         } catch (err) {
           console.error("Erro ao atualizar botão de auth:", err);
         }
       }
+
 
       // Inicializa apenas se estiver na página com o botão auth
       if (authBtn) {

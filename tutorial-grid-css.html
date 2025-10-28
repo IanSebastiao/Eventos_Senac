@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Grid – Tutorial Completo</title>
+<style>
+* { box-sizing: border-box; font-family: "Segoe UI", Roboto, sans-serif; }
+body { background: #f4f6f8; color: #333; margin:0; padding-top:120px; line-height:1.6; transition:0.3s;}
+pre { background: #eee; padding:10px; border-radius:8px; overflow-x:auto; }
+.exemplo { background:#fff; padding:20px; border-radius:10px; margin:20px auto; width:90%; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.grid { display:grid; gap:10px; background:#ddd; padding:10px; }
+.grid div { background:#4a90e2; color:#fff; text-align:center; padding:20px 0; border-radius:5px; font-weight:bold; }
+#site-header { position: fixed; top:0; left:0; right:0; background:#2c3e50; color:#fff; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; padding:15px 20px; z-index:100; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+#site-header h1 { margin:0; font-size:1.5rem;}
+#site-header nav a { color:#fff; text-decoration:none; margin:0 10px;}
+#modo { background:#34495e; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer; font-weight:bold; }
+.toggle-code { background:none; border:none; cursor:pointer; font-size:1.4rem; margin-bottom:8px;}
+.code-block { display:none; margin-top:10px;}
+.layout { display:grid; grid-template-areas:"header header" "menu main" "menu sidebar" "footer footer"; grid-template-columns:1fr 3fr; gap:12px; padding:12px; background:#ecf0f1; border-radius:8px;}
+.layout-header { grid-area: header; background:#2980b9; color:#fff; padding:12px; border-radius:8px;}
+.layout-menu { grid-area: menu; background:#27ae60; color:#fff; padding:12px; border-radius:8px;}
+.layout-main { grid-area: main; background:#8e44ad; color:#fff; padding:12px; border-radius:8px;}
+.layout-sidebar { grid-area: sidebar; background:#f39c12; color:#fff; padding:12px; border-radius:8px;}
+.layout-footer { grid-area: footer; background:#c0392b; color:#fff; padding:12px; border-radius:8px;}
+@media(max-width:720px){ .layout{grid-template-columns:1fr; grid-template-areas:"header" "menu" "main" "sidebar" "footer";} }
+.grid7 { grid-template-columns:repeat(3,100px); grid-template-rows:repeat(2,100px); justify-content:center; align-content:center; height:300px; background:#f1c40f;}
+.grid7 div { background:#2c3e50; }
+body.dark{ background:#1e272e; color:#ecf0f1;}
+body.dark .exemplo { background:#2f3640; }
+body.dark pre { background:#444; color:#eee; }
+body.dark .toggle-code { color:#9b59b6; }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <h1>CSS Grid – Tutorial Completo</h1>
+  <nav>
+    <a href="#ex1">1</a>
+    <a href="#ex2">2</a>
+    <a href="#ex3">3</a>
+    <a href="#ex4">4</a>
+    <a href="#ex5">5</a>
+    <a href="#ex6">6</a>
+    <a href="#ex7">7</a>
+  </nav>
+  <button id="modo">🌙</button>
+</header>
+
+<!-- EXEMPLO 1: Colunas fixas -->
+<section class="exemplo" id="ex1">
+<h2>Exemplo 1 – Colunas fixas</h2>
+<p>Cada coluna tem largura fixa (100px) e altura fixa.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>&lt;div class="grid grid1"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+
+.grid1 {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 100px 100px;
+  gap:10px;
+}</code></pre>
+</div>
+<div class="grid grid1" style="grid-template-columns:100px 100px; grid-template-rows:100px 100px;">
+  <div>1</div><div>2</div><div>3</div><div>4</div>
+</div>
+</section>
+
+<!-- EXEMPLO 2: Colunas proporcionais (fr) -->
+<section class="exemplo" id="ex2">
+<h2>Exemplo 2 – Colunas proporcionais</h2>
+<p>Usando frações (fr) diferentes para cada coluna.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>&lt;div class="grid grid2"&gt;
+  &lt;div&gt;A&lt;/div&gt;
+  &lt;div&gt;B&lt;/div&gt;
+  &lt;div&gt;C&lt;/div&gt;
+&lt;/div&gt;
+
+.grid2 {
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap:10px;
+}</code></pre>
+</div>
+<div class="grid grid2" style="grid-template-columns:1fr 2fr 1fr;">
+  <div>A</div><div>B</div><div>C</div>
+</div>
+</section>
+
+<!-- EXEMPLO 3: repeat() -->
+<section class="exemplo" id="ex3">
+<h2>Exemplo 3 – repeat()</h2>
+<p>Cria 4 colunas iguais usando repeat().</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>&lt;div class="grid grid3"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+
+.grid3 {
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:10px;
+}</code></pre>
+</div>
+<div class="grid" style="grid-template-columns:repeat(4,1fr);">
+  <div>1</div><div>2</div><div>3</div><div>4</div>
+</div>
+</section>
+
+<!-- EXEMPLO 4: auto-fit / minmax() -->
+<section class="exemplo" id="ex4">
+<h2>Exemplo 4 – auto-fit e minmax()</h2>
+<p>Colunas responsivas que se adaptam ao tamanho do container.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+}</code></pre>
+</div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+</div>
+</section>
+
+<!-- EXEMPLO 5: grid-column / grid-row -->
+<section class="exemplo" id="ex5">
+<h2>Exemplo 5 – grid-column / grid-row</h2>
+<p>Um item ocupa mais de uma coluna.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>.grid div:nth-child(1){ grid-column: 1 / 3; }
+&lt;div class="grid"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr); grid-template-rows:100px 100px;">
+  <div style="grid-column:1/3;background:#16a085;">1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+</section>
+
+<!-- EXEMPLO 6: grid-template-areas -->
+<section class="exemplo" id="ex6">
+<h2>Exemplo 6 – grid-template-areas</h2>
+<p>Layout usando áreas nomeadas.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>&lt;div class="layout"&gt;
+  &lt;header class="layout-header"&gt;Header&lt;/header&gt;
+  &lt;nav class="layout-menu"&gt;Menu&lt;/nav&gt;
+  &lt;main class="layout-main"&gt;Main&lt;/main&gt;
+  &lt;aside class="layout-sidebar"&gt;Sidebar&lt;/aside&gt;
+  &lt;footer class="layout-footer"&gt;Footer&lt;/footer&gt;
+&lt;/div&gt;
+
+.layout {
+  display:grid;
+  grid-template-areas:
+    "header header"
+    "menu main"
+    "menu sidebar"
+    "footer footer";
+}</code></pre>
+</div>
+<div class="layout">
+  <header class="layout-header">Header</header>
+  <nav class="layout-menu">Menu</nav>
+  <main class="layout-main">Main</main>
+  <aside class="layout-sidebar">Sidebar</aside>
+  <footer class="layout-footer">Footer</footer>
+</div>
+</section>
+
+<!-- EXEMPLO 7: alinhamento -->
+<section class="exemplo" id="ex7">
+<h2>Exemplo 7 – Alinhamento</h2>
+<p>Alinhando itens com <code>justify-content</code> e <code>align-content</code>.</p>
+<button class="toggle-code">👁️ Mostrar código</button>
+<div class="code-block">
+<pre><code>.grid7 {
+  display:grid;
+  grid-template-columns:repeat(3,100px);
+  grid-template-rows:repeat(2,100px);
+  justify-content:center;
+  align-content:center;
+}</code></pre>
+</div>
+<div class="grid7">
+  <div>1</div><div>2</div><div>3</div>
+  <div>4</div><div>5</div><div>6</div>
+</div>
+</section>
+
+<script>
+document.querySelectorAll('.toggle-code').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const block = btn.nextElementSibling;
+    block.style.display = block.style.display==='block'?'none':'block';
+    btn.textContent = block.style.display==='block'?'🙈 Ocultar código':'👁️ Mostrar código';
+  });
+});
+document.getElementById("modo").addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+});
+</script>
+
+</body>
+</html>

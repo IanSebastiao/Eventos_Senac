@@ -1,0 +1,220 @@
+/* ===============================
+   ESTILOS GERAIS
+=============================== */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 80px;
+  text-align: center;
+  color: #004b8d;
+}
+
+/* ===============================
+   CONTAINER PRINCIPAL
+=============================== */
+main {
+  width: 80%;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   FORMULÁRIO
+=============================== */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Duas colunas */
+  gap: 10px;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: #004b8d;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  grid-column: span 2;
+  /* Ocupa toda a linha */
+}
+
+#foto {
+  grid-column: span 2;
+}
+
+button[type="submit"] {
+  grid-column: span 2;
+  /* Centraliza o botão */
+  background-color: #004b8d;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #003970;
+}
+
+/* ===============================
+   PRÉ-VISUALIZAÇÃO DE IMAGEM
+=============================== */
+#preview-container {
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#preview-img {
+  max-width: 200px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================
+   TABELA DE ATIVIDADES
+=============================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+table thead {
+  background-color: #004b8d;
+  color: #fff;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: #f5f8fa;
+}
+
+/* Botões de ação */
+td button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+td button:first-child {
+  background-color: #ff8a00;
+  color: #fff;
+}
+
+td button:first-child:hover {
+  background-color: #e67a00;
+}
+
+td button:last-child {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+td button:last-child:hover {
+  background-color: #bb2d3b;
+}
+
+/* ===============================
+   RESPONSIVIDADE
+=============================== */
+@media (max-width: 900px) {
+  form {
+    grid-template-columns: 1fr;
+    /* Uma coluna */
+  }
+
+  textarea,
+  #foto,
+  button[type="submit"],
+  #preview-container {
+    grid-column: span 1;
+  }
+
+  main {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  table thead {
+    display: none;
+  }
+
+  table tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #004b8d;
+  }
+
+  td button {
+    margin: 3px 5px;
+  }
+}
