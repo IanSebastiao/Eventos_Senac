@@ -9,25 +9,6 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <h1>Cadastre-se</h1>
-    <nav class="navbar">
-      <button class="menu-toggle" aria-label="Abrir menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="programacao.html"><i class="fas fa-calendar-alt"></i> Programação</a></li>
-        <li><a href="inscricao.html"><i class="fas fa-address-book"></i> Inscrição</a></li>
-        <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
-      </ul>
-      <!-- botão de autenticação -->
-      <div class="auth-area">
-        <!-- inicialmente mostra Entrar; após login mostra nome + Sair -->
-        <button id="auth-btn" class="btn-auth">Entrar</button>
-      </div>
-    </nav>
-  </header>
 
   <main class="auth-container">
     <div class="auth-card">
@@ -54,8 +35,12 @@
     <p>&copy; 2025 Senac CEP Catalão</p>
   </footer>
 
-  <!-- Supabase -->
+  <script src="js/navbar.js"></script>
+  <script src="js/menu.js" defer></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <!-- Supabase -->
 
   <script>
     // ===============================
@@ -66,6 +51,19 @@
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5haHhidXp6bWF0ZHpycWFhY3JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NDE4NTQsImV4cCI6MjA3NTAxNzg1NH0.wMiiiZZ3ZWxRy_RD_bRjHU4ck9tFpi1Ey8CPwFG18tQ";
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ===============================
+    // VERIFICA SE ESTÁ LOGADO
+    // ===============================
+    async function verificarLogin() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "login.html";
+      }
+      return user;
+    }
+
 
     // ===============================
     // CADASTRO DE NOVO USUÁRIO
@@ -104,7 +102,13 @@
         window.location.href = "login.html";
       }
     });
+    (async () => {
+      await verificarLogin();
+    })();
+
+
   </script>
+
 </body>
 
 </html>

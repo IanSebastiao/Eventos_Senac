@@ -107,6 +107,7 @@ if (typeof window.authLoaded === 'undefined') {
       // ===============================
       const authBtn = document.getElementById("auth-btn");
       const gestaoLink = document.getElementById("gestao");
+      const cadastroLink = document.getElementById("cadastro");
 
       async function atualizarBotaoAuth() {
         if (!authBtn) return;
@@ -129,6 +130,7 @@ if (typeof window.authLoaded === 'undefined') {
 
             // Mostra o link de gestão
             if (gestaoLink) gestaoLink.style.display = "inline-block";
+            if (cadastroLink) cadastroLink.style.display = "inline-block";
 
             authBtn.onclick = async () => {
               const { error } = await supabase.auth.signOut();
