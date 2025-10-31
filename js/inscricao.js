@@ -7,13 +7,25 @@ const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Seleciona elementos do DOM
 const selectAtividade = document.getElementById("atividade");
-console.log(selectAtividade);
-const form = document.getElementById("formInscricao"); 
+const form = document.getElementById("formInscricao");
+
+// Criar área para exibir vagas disponíveis
+let infoVagas = document.getElementById("infoVagas");
+if (!infoVagas) {
+  infoVagas = document.createElement("div");
+  infoVagas.id = "infoVagas";
+  infoVagas.style.marginTop = "8px";
+  infoVagas.style.fontSize = "14px";
+  infoVagas.style.color = "#333";
+  selectAtividade.insertAdjacentElement("afterend", infoVagas);
+}
+
+let listaAtividades = []; // armazenar dados carregados
 
 async function carregarAtividades() {
   const { data, error } = await client
     .from("tbatividades")
-    .select("id, titulo, data")
+    .select("id, titulo, data, vagas")
     .order("data", { ascending: true });
 
   if (error) {
@@ -32,25 +44,90 @@ async function carregarAtividades() {
     return;
   }
 
+  listaAtividades = atividadesFuturas;
+
   selectAtividade.innerHTML = '<option value="">Selecione uma atividade</option>';
-  atividadesFuturas.forEach((ev) => {
-    const opcao = document.createElement("option");
+  for (const ev of atividadesFuturas) {
     const dataFormatada = new Date(ev.data).toLocaleDateString("pt-BR", {
       day: "2-digit",
       month: "2-digit",
     });
+    const opcao = document.createElement("option");
     opcao.value = ev.id;
     opcao.textContent = `${ev.titulo} — ${dataFormatada}`;
     selectAtividade.appendChild(opcao);
-  });
+  }
 
   // Pré-seleciona evento via parâmetro ?id=ID
   const params = new URLSearchParams(window.location.search);
   const eventoId = params.get("id");
-  if (eventoId) selectAtividade.value = eventoId;
+  if (eventoId) {
+    selectAtividade.value = eventoId;
+    await mostrarInfoVagas(eventoId);
+  }
+}
+
+// Função que exibe as vagas disponíveis e restantes
+async function mostrarInfoVagas(atividade_id) {
+  if (!atividade_id) {
+    infoVagas.textContent = "";
+    return;
+  }
+
+  const atividade = listaAtividades.find((a) => a.id == atividade_id);
+  if (!atividade) return;
+
+  const { count, error } = await client
+    .from("tbinscricoes")
+    .select("*", { count: "exact", head: true })
+    .eq("idatividade", atividade_id);
+
+  if (error) {
+    infoVagas.textContent = "Erro ao carregar informações de vagas.";
+    return;
+  }
+
+  const vagasTotais = atividade.vagas;
+  const vagasRestantes = Math.max(vagasTotais - count, 0);
+
+  infoVagas.innerHTML = `
+    <strong>Vagas totais:</strong> ${vagasTotais}<br>
+    <strong>Vagas restantes:</strong> ${vagasRestantes}
+  `;
 }
 
 async function salvarInscricao(nome, email, atividade_id) {
+  // Busca atividade
+  const { data: atividade, error: erroAtividade } = await client
+    .from("tbatividades")
+    .select("vagas")
+    .eq("id", atividade_id)
+    .single();
+
+  if (erroAtividade) {
+    console.error("Erro ao buscar atividade:", erroAtividade.message);
+    alert("Erro ao verificar disponibilidade. Tente novamente.");
+    return false;
+  }
+
+  // Conta quantos já estão inscritos
+  const { count, error: erroContagem } = await client
+    .from("tbinscricoes")
+    .select("*", { count: "exact", head: true })
+    .eq("idatividade", atividade_id);
+
+  if (erroContagem) {
+    console.error("Erro ao contar inscrições:", erroContagem.message);
+    alert("Erro ao verificar vagas. Tente novamente.");
+    return false;
+  }
+
+  if (count >= atividade.vagas) {
+    alert("As vagas para este evento estão esgotadas!");
+    return false;
+  }
+
+  // Verifica se o e-mail já está inscrito
   const { data: jaExiste, error: erroBusca } = await client
     .from("tbinscricoes")
     .select("*")
@@ -68,6 +145,7 @@ async function salvarInscricao(nome, email, atividade_id) {
     return false;
   }
 
+  // Insere a inscrição
   const { error } = await client.from("tbinscricoes").insert([
     {
       nome,
@@ -84,6 +162,11 @@ async function salvarInscricao(nome, email, atividade_id) {
 
   return true;
 }
+
+// Atualiza as vagas mostradas sempre que o usuário muda a seleção
+selectAtividade.addEventListener("change", (e) => {
+  mostrarInfoVagas(e.target.value);
+});
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -102,6 +185,7 @@ form.addEventListener("submit", async (e) => {
   if (sucesso) {
     alert(`Inscrição realizada com sucesso!\n\nNome: ${nome}\nE-mail: ${email}`);
     form.reset();
+    await mostrarInfoVagas(atividade_id); // atualiza vagas após inscrição
   }
 });
 
