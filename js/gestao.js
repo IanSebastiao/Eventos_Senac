@@ -137,11 +137,15 @@ async function carregarAtividades() {
       <td data-label="Ações">
         <button class="editar"><i class="fa-solid fa-pen-to-square"></i></button>
         <button class="excluir"><i class="fa-solid fa-trash"></i></button>
+        <button class="ver-inscritos"><i class="fa-solid fa-users"></i></button>
       </td>
     `;
 
         tr.querySelector(".editar").addEventListener("click", () => editarAtividade(atividade));
         tr.querySelector(".excluir").addEventListener("click", () => excluirAtividade(atividade.id));
+        tr.querySelector(".ver-inscritos").addEventListener("click", () => {
+            window.location.href = `inscritos.html?id=${atividade.id}`;
+        });
 
         tabela.appendChild(tr);
     });

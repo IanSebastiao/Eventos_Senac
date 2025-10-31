@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Inscritos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    #infoAtividade {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+    }
+    .voltar {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inscritos no Evento</h1>
+  <div id="infoAtividade">Carregando...</div>
+  <table id="tabelaInscritos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <a class="voltar" href="gestao.html"><i class="fa-solid fa-arrow-left"></i> Voltar à Gestão</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://nahxbuzzmatdzrqaacrf.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5haHhidXp6bWF0ZHpycWFhY3JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NDE4NTQsImV4cCI6MjA3NTAxNzg1NH0.wMiiiZZ3ZWxRy_RD_bRjHU4ck9tFpi1Ey8CPwFG18tQ";
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const tabela = document.querySelector("#tabelaInscritos tbody");
+    const infoAtividade = document.getElementById("infoAtividade");
+
+    async function carregarInscritos() {
+      const params = new URLSearchParams(window.location.search);
+      const idAtividade = params.get("id");
+
+      if (!idAtividade) {
+        infoAtividade.textContent = "ID da atividade não informado.";
+        return;
+      }
+
+      // Busca informações da atividade
+      const { data: atividade, error: erroAtividade } = await supabase
+        .from("tbatividades")
+        .select("titulo, data, vagas")
+        .eq("id", idAtividade)
+        .single();
+
+      if (erroAtividade || !atividade) {
+        infoAtividade.textContent = "Atividade não encontrada.";
+        return;
+      }
+
+      const dataFormatada = new Date(atividade.data).toLocaleDateString("pt-BR");
+      infoAtividade.innerHTML = `
+        <strong>${atividade.titulo}</strong> — ${dataFormatada} <br>
+        Vagas totais: ${atividade.vagas}
+      `;
+
+      // Busca os inscritos
+      const { data: inscritos, error } = await supabase
+        .from("tbinscricoes")
+        .select("nome, email")
+        .eq("idatividade", idAtividade)
+        .order("nome", { ascending: true });
+
+      if (error) {
+        tabela.innerHTML = "<tr><td colspan='2'>Erro ao carregar inscritos.</td></tr>";
+        return;
+      }
+
+      if (inscritos.length === 0) {
+        tabela.innerHTML = "<tr><td colspan='2'>Nenhum inscrito encontrado.</td></tr>";
+        return;
+      }
+
+      tabela.innerHTML = "";
+      inscritos.forEach(pessoa => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${pessoa.nome}</td><td>${pessoa.email}</td>`;
+        tabela.appendChild(tr);
+      });
+
+      infoAtividade.innerHTML += `<br><strong>Total inscritos:</strong> ${inscritos.length}`;
+    }
+
+    carregarInscritos();
+  </script>
+</body>
+</html>
